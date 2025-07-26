@@ -8,15 +8,14 @@ import com.reliaquest.api.exception.TooManyMockEmployeeRequestsException;
 import com.reliaquest.api.model.Employee;
 import com.reliaquest.api.util.EmployeeTransformer;
 import feign.FeignException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeService {
@@ -99,7 +98,8 @@ public class EmployeeService {
                     .map(EmployeeTransformer::toEmployee)
                     .map(EmployeeTransformer::toEmployeeDTO);
         } catch (FeignException e) {
-            log.error("\"Could not retrieve employee by id\" employeeId=\"{}\": errorMessage=\"{}\"", id, e.getMessage());
+            log.error(
+                    "\"Could not retrieve employee by id\" employeeId=\"{}\": errorMessage=\"{}\"", id, e.getMessage());
             throw handleFeignException(e);
         }
     }
@@ -115,7 +115,8 @@ public class EmployeeService {
         Employee employee = EmployeeTransformer.toEmployee(employeeDTO);
         MockEmployeeDTO mockEmployeeDTO = EmployeeTransformer.toMockEmployeeDTO(employee);
         try {
-            return Optional.ofNullable(mockEmployeeClient.createMockEmployee(MockEmployeeCreateRequestDTO.from(mockEmployeeDTO)))
+            return Optional.ofNullable(
+                            mockEmployeeClient.createMockEmployee(MockEmployeeCreateRequestDTO.from(mockEmployeeDTO)))
                     .map(MockEmployeeResponseDTO::data)
                     .map(EmployeeTransformer::toEmployee)
                     .map(EmployeeTransformer::toEmployeeDTO);

@@ -5,9 +5,7 @@ import com.reliaquest.api.exception.InvalidEmployeeException;
 import com.reliaquest.api.exception.MockEmployeeServiceException;
 import com.reliaquest.api.exception.TooManyMockEmployeeRequestsException;
 import com.reliaquest.api.service.EmployeeService;
-
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -133,7 +131,8 @@ public class EmployeeController implements IEmployeeController<EmployeeDTO, Empl
     public ResponseEntity<EmployeeDTO> createEmployee(EmployeeDTO employeeInput) {
         try {
             log.info("\"Received request to create employee\"");
-            return employeeService.create(employeeInput)
+            return employeeService
+                    .create(employeeInput)
                     .map(ResponseEntity.status(HttpStatus.CREATED)::body)
                     .orElse(ResponseEntity.notFound().build());
         } catch (InvalidEmployeeException ie) {

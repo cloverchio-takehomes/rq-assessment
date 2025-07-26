@@ -175,9 +175,7 @@ class ApiApplicationTest {
 
     @Test
     void testCreateEmployee_internalServerError() throws Exception {
-        doThrow(new MockEmployeeServiceException(500))
-                .when(employeeService)
-                .create(Mockito.any(EmployeeDTO.class));
+        doThrow(new MockEmployeeServiceException(500)).when(employeeService).create(Mockito.any(EmployeeDTO.class));
 
         mockMvc.perform(post(URL).contentType(MediaType.APPLICATION_JSON).content(CONTENT))
                 .andExpect(status().isInternalServerError());
@@ -192,9 +190,7 @@ class ApiApplicationTest {
 
     @Test
     void testDeleteEmployeeById_internalServerError() throws Exception {
-        doThrow(new MockEmployeeServiceException(500))
-                .when(employeeService)
-                .deleteByName(NAME);
+        doThrow(new MockEmployeeServiceException(500)).when(employeeService).deleteByName(NAME);
 
         mockMvc.perform(delete(URL + "/" + NAME)).andExpect(status().isInternalServerError());
     }

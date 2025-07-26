@@ -1,4 +1,3 @@
 package com.reliaquest.api.dto;
 
-public record MockEmployeeDeleteRequestDTO(String name) {
-}
+public record MockEmployeeDeleteRequestDTO(String name) {}

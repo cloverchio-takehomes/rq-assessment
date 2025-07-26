@@ -10,5 +10,4 @@ public record MockEmployeeDTO(
         @JsonProperty("employee_salary") Integer salary,
         @JsonProperty("employee_age") Integer age,
         @JsonProperty("employee_title") String title,
-        @JsonProperty("employee_email") String email) {
-}
+        @JsonProperty("employee_email") String email) {}
